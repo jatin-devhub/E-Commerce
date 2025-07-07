@@ -1,17 +1,16 @@
-using EcomBackend.Data;
 using EcomBackend.DTOs;
-using Microsoft.EntityFrameworkCore;
+using EcomBackend.Repositories;
 
 namespace EcomBackend.Services
 {
     public class CategoryService
     {
-        private readonly AppDbContext _db;
-        public CategoryService(AppDbContext db) => _db = db;
+        private readonly ICategoryRepository _repo;
+        public CategoryService(ICategoryRepository repo) => _repo = repo;
 
         public async Task<List<CategoryDTO>> GetCategoryTree()
         {
-            var categories = await _db.Categories.ToListAsync();
+            var categories = await _repo.GetAll();
 
             var lookup = categories.ToDictionary(c => c.Id, c => new CategoryDTO
             {

@@ -1,27 +1,27 @@
-using EcomBackend.Data;
 using EcomBackend.DTOs;
 using EcomBackend.Models;
-using Microsoft.EntityFrameworkCore;
+using EcomBackend.Repositories;
 
 namespace EcomBackend.Services
 {
     public class CartService
     {
-        private readonly AppDbContext _db;
+        private readonly IProductRepository _productRepo;
+        private readonly ICartRepository _cartRepo;
 
-        public CartService(AppDbContext db)
+        public CartService(IProductRepository productRepo, ICartRepository cartRepo)
         {
-            _db = db;
+            _productRepo = productRepo;
+            _cartRepo = cartRepo;
         }
 
         public async Task AddToCart(AddToCartDTO cartDTO)
         {
-            var product = await _db.Products.FindAsync(cartDTO.ProductId);
+            var product = await _productRepo.GetProductById(cartDTO.ProductId);
             if (product == null)
                 throw new KeyNotFoundException($"Product with ID {cartDTO.ProductId} not found.");
 
-            var existingItem = await _db.CartItems
-                .FirstOrDefaultAsync(c => c.UserId == 1 && c.ProductId == cartDTO.ProductId);
+            var existingItem = await _cartRepo.GetByUserAndProduct(1, cartDTO.ProductId);
 
             if (existingItem != null)
             {
@@ -35,19 +35,15 @@ namespace EcomBackend.Services
                     ProductId = cartDTO.ProductId,
                     Quantity = cartDTO.Quantity
                 };
-                _db.CartItems.Add(cartItem);
+                await _cartRepo.Add(cartItem);
             }
 
-            await _db.SaveChangesAsync();
+            await _cartRepo.SaveChanges();
         }
 
         public async Task<CartDTO> GetCart()
         {
-            var allItems = await _db.CartItems
-                .Include(c => c.Product)
-                .Where(c => c.UserId == 1)
-                .ToListAsync();
-
+            var allItems = await _cartRepo.GetByUser(1);
             var cart = new CartDTO
             {
                 Items = allItems.Select(c => new CartItemDTO
