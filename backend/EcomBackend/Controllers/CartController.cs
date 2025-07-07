@@ -28,6 +28,13 @@ namespace EcomBackend.Controllers
                 return NotFound(new { error = knf.Message });
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult<CartDTO>> GetCart()
+        {
+            var cart = await _cartService.GetCart();
+            return Ok(cart);
+        }
     }
 
 }

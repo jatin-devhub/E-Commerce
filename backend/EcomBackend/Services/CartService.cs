@@ -19,7 +19,7 @@ namespace EcomBackend.Services
             var product = await _db.Products.FindAsync(cartDTO.ProductId);
             if (product == null)
                 throw new KeyNotFoundException($"Product with ID {cartDTO.ProductId} not found.");
-                
+
             var existingItem = await _db.CartItems
                 .FirstOrDefaultAsync(c => c.UserId == 1 && c.ProductId == cartDTO.ProductId);
 
@@ -39,6 +39,27 @@ namespace EcomBackend.Services
             }
 
             await _db.SaveChangesAsync();
+        }
+
+        public async Task<CartDTO> GetCart()
+        {
+            var allItems = await _db.CartItems
+                .Include(c => c.Product)
+                .Where(c => c.UserId == 1)
+                .ToListAsync();
+
+            var cart = new CartDTO
+            {
+                Items = allItems.Select(c => new CartItemDTO
+                {
+                    ProductId = c.ProductId,
+                    ProductName = c.Product != null ? c.Product.Name : string.Empty,
+                    UnitPrice = c.Product != null ? c.Product.Price : 0,
+                    Quantity = c.Quantity
+                }).ToList()
+            };
+
+            return cart;
         }
     }
 }
