@@ -7,14 +7,14 @@
   
     <!-- Leaf node template -->
     <mat-nested-tree-node *matTreeNodeDef="let node">
-      <div class="mat-tree-node" [routerLink]="['/products', node.id]">
+      <div class="mat-tree-node pointer" [routerLink]="['/products', node.id]">
         {{ node.name }}
       </div>
     </mat-nested-tree-node>
   
     <!-- Expandable node template -->
     <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-      <div class="mat-tree-node" [routerLink]="['/products', node.id]">
+      <div class="mat-tree-node pointer" [routerLink]="['/products', node.id]">
         <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
           <mat-icon class="mat-icon-rtl-mirror">
             {{ tree.isExpanded(node) ? 'expand_more' : 'chevron_right' }}

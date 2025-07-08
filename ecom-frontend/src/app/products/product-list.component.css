@@ -1,0 +1,18 @@
+.product-title {
+  color: white;
+  padding: 10px;
+}
+
+.product-grid {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.product-card {
+  margin: 10px;
+}
+
+.price {
+    color: white;
+}

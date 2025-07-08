@@ -1,0 +1,21 @@
+.cart-items {
+    display: flex;
+}
+
+.cart-item {
+    margin: 10px;
+}
+
+.cart-item-title {
+    color: white;
+    padding: 10px;
+}
+
+.cart-item-content {
+    color: white;
+}
+
+.cart-total {
+    color: white;
+    padding: 10px;
+}

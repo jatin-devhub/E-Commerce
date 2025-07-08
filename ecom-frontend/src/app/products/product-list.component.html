@@ -5,10 +5,10 @@
 } @else {
 <div class="product-grid">
   @for (p of products; track p.name) {
-  <mat-card appearance="outlined">
-    <mat-card-title>{{ p.name }}</mat-card-title>
+  <mat-card appearance="outlined" class="product-card">
+    <mat-card-title class="product-title">{{ p.name }}</mat-card-title>
     <mat-card-content>
-      <p>₹{{ p.price }}</p>
+      <p class="price">₹{{ p.price }}</p>
       <form [formGroup]="formGroups[p.id]" (ngSubmit)="addToCart(p)">
         <mat-form-field appearance="outline">
           <mat-label>Quantity</mat-label>

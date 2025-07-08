@@ -26,6 +26,7 @@ import { Product } from '../core/models/product.model';
     MatProgressSpinnerModule
   ],
   templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductListComponent implements OnInit {

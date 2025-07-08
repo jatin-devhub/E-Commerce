@@ -22,6 +22,7 @@ interface CartResponse {
     MatInputModule,
     MatButtonModule,
   ],
+  styleUrl: './cart-page.component.css',
   templateUrl: './cart-page.component.html',
 })
 export class CartPageComponent implements OnInit {
