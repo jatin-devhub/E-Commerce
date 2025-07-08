@@ -15,23 +15,11 @@ export class BackendService {
         );
     }
 
-//   post<T>(endpoint: string, body: any): Observable<T> {
-//     return this.http.post<T>(`${this.baseUrl}${endpoint}`, body).pipe(
-//       catchError(this.handleError)
-//     );
-//   }
-
-//   put<T>(endpoint: string, body: any): Observable<T> {
-//     return this.http.put<T>(`${this.baseUrl}${endpoint}`, body).pipe(
-//       catchError(this.handleError)
-//     );
-//   }
-
-//   delete<T>(endpoint: string): Observable<T> {
-//     return this.http.delete<T>(`${this.baseUrl}${endpoint}`).pipe(
-//       catchError(this.handleError)
-//     );
-//   }
+  post<T>(endpoint: string, body: any): Observable<T> {
+    return this.http.post<T>(`${this.baseUrl}${endpoint}`, body).pipe(
+      catchError(this.handleError)
+    );
+  }
 
     private handleError(error: any) {
         console.error('API Error:', error);
