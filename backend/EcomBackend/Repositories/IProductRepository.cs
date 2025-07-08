@@ -6,8 +6,10 @@ namespace EcomBackend.Repositories
     {
         Task<List<Product>> GetAll();
 
-        Task<Product> GetProductById(int id);
+        Task<Product?> GetProductById(int id);
 
         Task<List<Product>> GetByCategoryIds(List<int> categoryIds);
+
+        Task<List<Product>> GetRelatedByGraph(int productId);
     }
 }

@@ -12,7 +12,7 @@ namespace EcomBackend.Repositories
         public async Task<List<Product>> GetAll()
             => await _db.Products.Include(p => p.Category).AsNoTracking().ToListAsync();
 
-        public async Task<Product> GetProductById(int id)
+        public async Task<Product?> GetProductById(int id)
         {
             return await _db.Products
                 .Include(p => p.Category)
@@ -23,6 +23,14 @@ namespace EcomBackend.Repositories
         {
             return await _db.Products
                 .Where(p => categoryIds.Contains(p.CategoryId))
+                .ToListAsync();
+        }
+
+        public async Task<List<Product>> GetRelatedByGraph(int productId)
+        {
+            return await _db.ProductRelations
+                .Where(pr => pr.ProductId == productId)
+                .Select(pr => pr.RelatedProduct)
                 .ToListAsync();
         }
     }

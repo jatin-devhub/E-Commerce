@@ -4,7 +4,7 @@ using EcomBackend.Repositories;
 
 namespace EcomBackend.Services
 {
-    public class CartService
+    public class CartService : ICartService
     {
         private readonly IProductRepository _productRepo;
         private readonly ICartRepository _cartRepo;

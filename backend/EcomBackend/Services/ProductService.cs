@@ -1,12 +1,10 @@
-using EcomBackend.Data;
 using EcomBackend.DTOs;
 using EcomBackend.Models;
 using EcomBackend.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace EcomBackend.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly ICategoryRepository _catRepo;
         private readonly IProductRepository _productRepo;
@@ -46,6 +44,16 @@ namespace EcomBackend.Services
             }
 
             return result;
+        }
+
+        public async Task<Product?> GetById(int id)
+        {
+            return await _productRepo.GetProductById(id);
+        }
+
+        public async Task<List<Product>> GetRelated(int id)
+        {
+            return await _productRepo.GetRelatedByGraph(id);
         }
     }
 }

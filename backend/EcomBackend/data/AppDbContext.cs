@@ -10,6 +10,7 @@ namespace EcomBackend.Data
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<Product> Products => Set<Product>();
         public DbSet<CartItem> CartItems => Set<CartItem>();
+        public DbSet<ProductRelation> ProductRelations => Set<ProductRelation>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,11 +33,39 @@ namespace EcomBackend.Data
                 new Product { Id = 5, Name = "Mini Fridge M100", Price = 199.99m, AvailabilityQty = 3, CategoryId = 8 }
             );
 
+            modelBuilder.Entity<ProductRelation>().HasData(
+                new { ProductId = 1, RelatedProductId = 2 },
+                new { ProductId = 1, RelatedProductId = 3 },
+                new { ProductId = 2, RelatedProductId = 4 },
+
+                new { ProductId = 2, RelatedProductId = 1 },
+                new { ProductId = 3, RelatedProductId = 1 },
+
+                new { ProductId = 4, RelatedProductId = 3 },    
+                new { ProductId = 3, RelatedProductId = 4 },
+
+                new { ProductId = 5, RelatedProductId = 4 },
+                new { ProductId = 4, RelatedProductId = 5 }
+            );
+
             modelBuilder.Entity<Category>()
                 .HasOne(c => c.Parent)
                 .WithMany(c => c.Children)
                 .HasForeignKey(c => c.ParentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ProductRelation>()
+                .HasKey(pr => new { pr.ProductId, pr.RelatedProductId });
+
+            modelBuilder.Entity<ProductRelation>()
+                .HasOne(pr => pr.Product)
+                .WithMany(p => p.RelatedFrom)  
+                .HasForeignKey(pr => pr.ProductId);
+
+            modelBuilder.Entity<ProductRelation>()
+                .HasOne(pr => pr.RelatedProduct)
+                .WithMany(p => p.RelatedTo) 
+                .HasForeignKey(pr => pr.RelatedProductId);
         }
     }
 }

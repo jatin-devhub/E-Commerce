@@ -9,5 +9,7 @@ namespace EcomBackend.Models
 
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
+        public List<ProductRelation> RelatedFrom { get; set; } = new();
+        public List<ProductRelation> RelatedTo   { get; set; } = new();
     }
 }

@@ -3,7 +3,7 @@ using EcomBackend.Repositories;
 
 namespace EcomBackend.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repo;
         public CategoryService(ICategoryRepository repo) => _repo = repo;
