@@ -6,5 +6,7 @@ namespace EcomBackend.Services
     {
         Task AddToCart(AddToCartDTO cartDTO);
         Task<CartDTO> GetCart();
+        Task UpdateCartItem(int id, UpdateCartItemDTO cartUpdateDTO);
+        Task DeleteCartItem(int id);
     }
 }

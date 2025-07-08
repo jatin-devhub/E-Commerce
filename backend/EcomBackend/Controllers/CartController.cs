@@ -35,6 +35,38 @@ namespace EcomBackend.Controllers
             var cart = await _cartService.GetCart();
             return Ok(cart);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCartItem(int id, [FromBody] UpdateCartItemDTO updateCartDTO)
+        {
+            try
+            {
+                await _cartService.UpdateCartItem(id, updateCartDTO);
+                return NoContent(); 
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCartItem(int id)
+        {
+            try
+            {
+                await _cartService.DeleteCartItem(id);
+                return NoContent(); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 
 }

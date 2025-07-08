@@ -57,5 +57,20 @@ namespace EcomBackend.Services
 
             return cart;
         }
+
+        public async Task UpdateCartItem(int id, UpdateCartItemDTO cartUpdateDTO)
+        {
+            var item = await _cartRepo.GetById(id);
+            if (item == null) throw new KeyNotFoundException("Cart item not found");
+
+            item.Quantity = cartUpdateDTO.Quantity;
+            await _cartRepo.Update(item);
+        }
+
+        public async Task DeleteCartItem(int id)
+        {
+            await _cartRepo.Delete(id);
+            await _cartRepo.SaveChanges();
+        }
     }
 }

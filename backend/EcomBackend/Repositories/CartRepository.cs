@@ -26,5 +26,25 @@ namespace EcomBackend.Repositories
         {
             await _db.SaveChangesAsync();
         }
+
+        public async Task<CartItem?> GetById(int id)
+        {
+            return await _db.CartItems.Include(c => c.Product).FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task Update(CartItem item)
+        {
+            _db.CartItems.Update(item);
+            await SaveChanges();
+        }
+
+        public async Task Delete(int id)
+        {
+            var item = await GetById(id);
+            if (item != null)
+            {
+                _db.CartItems.Remove(item);
+            }
+        }
     }
 }
