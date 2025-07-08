@@ -30,7 +30,8 @@ namespace EcomBackend.Services
             {
                 Id = p.Id,
                 Name = p.Name,
-                Price = p.Price
+                Price = p.Price,
+                AvailableQty = p.AvailabilityQty
             }).ToList();
         }
 
