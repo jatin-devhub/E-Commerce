@@ -28,7 +28,7 @@ namespace EcomBackend.Services
                 }
                 else
                 {
-                    lookup[(int)cat.ParentId].SubCategories.Add(lookup[cat.Id]);
+                    lookup[(int)cat.ParentId].Children.Add(lookup[cat.Id]);
                 }
             }
 
