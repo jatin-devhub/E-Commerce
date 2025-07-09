@@ -69,7 +69,8 @@ export class CartPageComponent implements OnInit {
       return;
     }
     const quantity = form.value.quantity;
-    this.api.put(`/cart/${item.id}`, { quantity })
+    console.log(quantity, item)
+    this.api.put(`/Cart/${item.id}`, { quantity })
       .subscribe({
         next: () => alert('Quantity updated!'),
         error: (err) => {

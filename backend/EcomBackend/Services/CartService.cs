@@ -48,6 +48,7 @@ namespace EcomBackend.Services
             {
                 Items = allItems.Select(c => new CartItemDTO
                 {
+                    Id = c.Id,
                     ProductId = c.ProductId,
                     ProductName = c.Product != null ? c.Product.Name : string.Empty,
                     UnitPrice = c.Product != null ? c.Product.Price : 0,
