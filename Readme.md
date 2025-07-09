@@ -40,3 +40,15 @@ npm install
 ng serve
 ```
 This should start server on http://localhost:4200 where you can test this application. 
+
+## Solution
+### Frontend
+The frontend was designed to keep the UI very simple and it fulfills all the functionalities. It currently has following pages:-
+
+- **Category Navigation Page** - It shows all the categories and on clicking on particular category you can go to products list in it's categories
+- **Product List Page** - It's a page where you can see all the products in the category, you can add to cart and also view product details.
+- **Product Details Page** - It's a page where all the details of single product is shown with related products.
+- **Cart Page** - It's a page where you can see all the products and edit quantities if needed
+
+### Backend
+Their are routes created to perform cart actions, categories and products view. These routes can be viewed at /swagger/index.html of backend endpoint
