@@ -8,8 +8,8 @@ import {
 import { MatTreeModule } from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { BackendService } from '../../core/services/backend.service';
-import { Category } from '../../core/models/category.model';
+import { BackendService } from '../core/services/backend.service';
+import { Category } from '../core/models/category.model';
 import { RouterModule } from '@angular/router';
 
 /**

@@ -1,0 +1,33 @@
+@if (loading) {
+<div>Loading ...</div>
+} @else if (error) {
+<div class="error">{{ error }}</div>
+} @else if(product != null) {
+<mat-card class="product-details-card">
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Price:</strong> ₹{{ product.price }}</p>
+    <p><strong>Available Quantity:</strong> {{ product.availableQty }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addToCart(product)">
+      Add to Cart
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<h3>Related Products</h3>
+<div class="related-products">
+  @for (related of relatedProducts; track related.name) {
+  <mat-card class="product-card">
+    <mat-card-title>{{ related.name }}</mat-card-title>
+    <mat-card-content>Price: ₹{{ related.price }}</mat-card-content>
+    <button mat-stroked-button color="accent" (click)="addToCart(related)">
+      Add to Cart
+    </button>
+  </mat-card>
+  }
+</div>
+}
